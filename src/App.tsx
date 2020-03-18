@@ -7,7 +7,9 @@ function App(): React.FunctionComponentElement<{}> {
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
-        <p>Zombie Roleplaying Application coming soon!</p>
+        <div className="alert alert-success" role="alert">
+          <p>Zombie Roleplaying Application coming soon!</p>
+        </div>
       </header>
     </div>
   )
