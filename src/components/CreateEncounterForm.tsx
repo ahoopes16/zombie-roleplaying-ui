@@ -1,6 +1,8 @@
 import React from 'react'
 import {
-  Container,
+  Card,
+  CardTitle,
+  CardBody,
   Col,
   Form,
   FormGroup,
@@ -11,26 +13,29 @@ import {
 
 function CreateEncounterForm(): React.FunctionComponentElement<{}> {
   return (
-    <Container id="create-encounter-form" className="border border-dark">
-      <Form className="form">
-        <Col>
-          <FormGroup>
-            <Input type="text" placeholder="Title" />
-            <FormText color="muted" className="float-left">
-              Please make sure the title is unique!
-            </FormText>
-          </FormGroup>
-        </Col>
+    <Card body className="form-container text-center">
+      <CardTitle tag="h2">Create an Encounter!</CardTitle>
+      <CardBody>
+        <Form>
+          <Col>
+            <FormGroup className="form-field">
+              <Input type="text" placeholder="Title" />
+              <FormText color="muted" className="float-left">
+                Please make sure the title is unique!
+              </FormText>
+            </FormGroup>
+          </Col>
 
-        <Col>
-          <FormGroup>
-            <Input type="textarea" placeholder="Description" />
-          </FormGroup>
-        </Col>
+          <Col>
+            <FormGroup className="form-field">
+              <Input type="textarea" placeholder="Description" />
+            </FormGroup>
+          </Col>
 
-        <Button color="primary">Create Encounter</Button>
-      </Form>
-    </Container>
+          <Button color="primary">Create Encounter</Button>
+        </Form>
+      </CardBody>
+    </Card>
   )
 }
 
