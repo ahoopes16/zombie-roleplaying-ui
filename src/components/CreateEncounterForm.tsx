@@ -1,34 +1,36 @@
 import React from 'react'
+import {
+  Container,
+  Col,
+  Form,
+  FormGroup,
+  FormText,
+  Input,
+  Button
+} from 'reactstrap'
 
 function CreateEncounterForm(): React.FunctionComponentElement<{}> {
   return (
-    <form>
-      <div className="form-group">
-        <input
-          id="title-input"
-          type="text"
-          className="form-control"
-          placeholder="Title"
-          aria-describedby="title-help"
-        />
-        <small id="title-help" className="form-text text-muted">
-          Please make sure your title is unique!
-        </small>
-      </div>
+    <Container id="create-encounter-form" className="border border-dark">
+      <Form className="form">
+        <Col>
+          <FormGroup>
+            <Input type="text" placeholder="Title" />
+            <FormText color="muted" className="float-left">
+              Please make sure the title is unique!
+            </FormText>
+          </FormGroup>
+        </Col>
 
-      <div className="form-group">
-        <textarea
-          id="description-input"
-          className="form-control"
-          rows={3}
-          placeholder="Description"
-        />
-      </div>
+        <Col>
+          <FormGroup>
+            <Input type="textarea" placeholder="Description" />
+          </FormGroup>
+        </Col>
 
-      <button type="submit" className="btn btn-primary">
-        Submit
-      </button>
-    </form>
+        <Button color="primary">Create Encounter</Button>
+      </Form>
+    </Container>
   )
 }
 
