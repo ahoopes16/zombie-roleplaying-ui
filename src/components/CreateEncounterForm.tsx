@@ -52,6 +52,8 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
     setDescription(event.currentTarget.value)
   }
 
+  const isDisabled = (): boolean => !title || !description
+
   return (
     <Card body className="form-container text-center">
       <CardTitle tag="h2">Create an Encounter!</CardTitle>
@@ -83,7 +85,7 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
             </FormGroup>
           </Col>
 
-          <Button color="primary" onClick={onClick}>
+          <Button color="primary" onClick={onClick} disabled={isDisabled()}>
             Create Encounter
           </Button>
         </Form>
