@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { FormEvent, FunctionComponentElement, useState } from 'react'
+import api from '../api'
+import Swal from 'sweetalert2'
 import {
   Card,
   CardTitle,
@@ -11,15 +13,59 @@ import {
   Button
 } from 'reactstrap'
 
-function CreateEncounterForm(): React.FunctionComponentElement<{}> {
+function CreateEncounterForm(): FunctionComponentElement<{}> {
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
+
+  const onClick = async (event: FormEvent<HTMLInputElement>): Promise<void> => {
+    event.preventDefault()
+
+    const body = { title, description }
+    try {
+      const { result } = await api.createEncounter(body)
+
+      Swal.fire({
+        title: `Encounter "${result.title}" successfully created!`,
+        text: "Can't wait to see who gets that one :D",
+        icon: 'success'
+      })
+
+      setTitle('')
+      setDescription('')
+    } catch (error) {
+      console.error(error)
+      Swal.fire({
+        title: "Sorry, we couldn't create your encounter!",
+        text: error.message,
+        icon: 'error'
+      })
+    }
+  }
+
+  const updateTitle = (event: FormEvent<HTMLInputElement>): void => {
+    event.preventDefault()
+    setTitle(event.currentTarget.value)
+  }
+
+  const updateDesc = (event: FormEvent<HTMLInputElement>): void => {
+    event.preventDefault()
+    setDescription(event.currentTarget.value)
+  }
+
   return (
     <Card body className="form-container text-center">
       <CardTitle tag="h2">Create an Encounter!</CardTitle>
+
       <CardBody>
         <Form>
           <Col>
             <FormGroup className="form-field">
-              <Input type="text" placeholder="Title" />
+              <Input
+                type="text"
+                placeholder="Title"
+                value={title}
+                onChange={updateTitle}
+              />
               <FormText color="muted" className="float-left">
                 Please make sure the title is unique!
               </FormText>
@@ -28,11 +74,18 @@ function CreateEncounterForm(): React.FunctionComponentElement<{}> {
 
           <Col>
             <FormGroup className="form-field">
-              <Input type="textarea" placeholder="Description" />
+              <Input
+                type="textarea"
+                placeholder="Description"
+                value={description}
+                onChange={updateDesc}
+              />
             </FormGroup>
           </Col>
 
-          <Button color="primary">Create Encounter</Button>
+          <Button color="primary" onClick={onClick}>
+            Create Encounter
+          </Button>
         </Form>
       </CardBody>
     </Card>
