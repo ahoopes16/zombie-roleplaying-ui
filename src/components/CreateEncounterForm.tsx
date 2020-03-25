@@ -63,6 +63,7 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
           <Col>
             <FormGroup className="form-field">
               <Input
+                id="create-encounter-title-input"
                 type="text"
                 placeholder="Title"
                 value={title}
@@ -77,6 +78,7 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
           <Col>
             <FormGroup className="form-field">
               <Input
+                id="create-encounter-description-input"
                 type="textarea"
                 placeholder="Description"
                 value={description}
