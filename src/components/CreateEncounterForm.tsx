@@ -55,7 +55,7 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
   const isDisabled = (): boolean => !title || !description
 
   return (
-    <Card body className="form-container text-center">
+    <Card className="form-container text-center">
       <CardTitle tag="h2">Create an Encounter!</CardTitle>
 
       <CardBody>
