@@ -8,6 +8,13 @@ class API {
     this.baseURL = baseURL
   }
 
+  public getEncounters(): Promise<APIResponse<Encounter[]>> {
+    return this.__request<APIResponse<Encounter[]>>(
+      'GET',
+      `${this.baseURL}/v1/encounters`
+    )
+  }
+
   public createEncounter(body: object): Promise<APIResponse<Encounter>> {
     return this.__request<APIResponse<Encounter>>(
       'POST',
@@ -19,7 +26,7 @@ class API {
   private async __request<T>(
     method: Method = 'GET',
     endpoint = '',
-    rawBody: object | string = '',
+    rawBody?: object | string,
     optionalHeaders = {}
   ): Promise<T> {
     const body = typeof rawBody === 'object' ? JSON.stringify(rawBody) : rawBody

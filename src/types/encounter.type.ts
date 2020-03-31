@@ -13,4 +13,6 @@ export interface Encounter {
   updatedAt: Date
   /** The version number for this document. Created by Mongoose */
   __v: number
+  /** This encounter's Mongo ObjectID */
+  _id: string
 }
