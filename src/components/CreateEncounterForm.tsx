@@ -1,10 +1,12 @@
 import React, { FormEvent, FunctionComponentElement, useState } from 'react'
 import api from '../api'
 import Swal from 'sweetalert2'
+import { NavLink } from 'react-router-dom'
 import {
   Card,
   CardTitle,
   CardBody,
+  CardFooter,
   Col,
   Form,
   FormGroup,
@@ -92,6 +94,10 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
           </Button>
         </Form>
       </CardBody>
+
+      <CardFooter>
+        <NavLink to="/encounters">List of Encounters</NavLink>
+      </CardFooter>
     </Card>
   )
 }
