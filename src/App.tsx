@@ -2,8 +2,8 @@ import React from 'react'
 import './App.css'
 import { HashRouter, Route, Switch, Redirect } from 'react-router-dom'
 import NavigationBar from './components/NavigationBar'
-import ListEncounters from './components/ListEncounters'
-import CreateEncounterForm from './components/CreateEncounterForm'
+import ListEncounters from './components/encounters/ListEncounters'
+import CreateEncounterForm from './components/encounters/CreateEncounterForm'
 
 function App(): React.FunctionComponentElement<{}> {
   return (

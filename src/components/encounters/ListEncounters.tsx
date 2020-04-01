@@ -1,6 +1,6 @@
 import React, { FunctionComponentElement, useState, useEffect } from 'react'
-import { Encounter } from '../types/encounter.type'
-import api from '../api'
+import { Encounter } from '../../types/encounter.type'
+import api from '../../api'
 import {
   Alert,
   Spinner,
