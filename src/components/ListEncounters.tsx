@@ -1,14 +1,12 @@
 import React, { FunctionComponentElement, useState, useEffect } from 'react'
 import { Encounter } from '../types/encounter.type'
 import api from '../api'
-import { NavLink } from 'react-router-dom'
 import {
   Alert,
   Spinner,
   Card,
   CardTitle,
   CardBody,
-  CardFooter,
   ListGroup,
   ListGroupItem,
   ListGroupItemHeading,
@@ -54,10 +52,6 @@ function ListEncounters(): FunctionComponentElement<{}> {
           ))}
         </ListGroup>
       </CardBody>
-
-      <CardFooter>
-        <NavLink to="/">Create an Encounter</NavLink>
-      </CardFooter>
     </Card>
   )
 }
