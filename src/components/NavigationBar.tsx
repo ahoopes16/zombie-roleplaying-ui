@@ -1,13 +1,15 @@
 import React, { FunctionComponentElement, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import {
   Collapse,
   Navbar,
   NavbarToggler,
   NavbarBrand,
   Nav,
-  NavItem,
-  NavLink
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem
 } from 'reactstrap'
 
 function NavigationBar(): FunctionComponentElement<{}> {
@@ -22,16 +24,19 @@ function NavigationBar(): FunctionComponentElement<{}> {
 
       <Collapse isOpen={isOpen} navbar>
         <Nav className="mr-auto" navbar>
-          <NavItem>
-            <NavLink>
-              <Link to="/">Create Encounter</Link>
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink>
-              <Link to="/encounters">List Encounters</Link>
-            </NavLink>
-          </NavItem>
+          <UncontrolledDropdown nav inNavbar>
+            <DropdownToggle nav caret>
+              Encounters
+            </DropdownToggle>
+            <DropdownMenu right>
+              <DropdownItem>
+                <NavLink to="/encounters">List</NavLink>
+              </DropdownItem>
+              <DropdownItem>
+                <NavLink to="/">Create</NavLink>
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledDropdown>
         </Nav>
       </Collapse>
     </Navbar>
