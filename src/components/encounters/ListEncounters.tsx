@@ -5,6 +5,7 @@ import {
   Alert,
   Spinner,
   Card,
+  CardHeader,
   CardTitle,
   CardBody,
   ListGroup,
@@ -39,8 +40,12 @@ function ListEncounters(): FunctionComponentElement<{}> {
   }
 
   return (
-    <Card className="form-container text-center">
-      <CardTitle tag="h2">Encounters</CardTitle>
+    <Card className="app-container">
+      <CardHeader>
+        <CardTitle tag="h2" className="text-center">
+          Encounters
+        </CardTitle>
+      </CardHeader>
 
       <CardBody>
         <ListGroup>
