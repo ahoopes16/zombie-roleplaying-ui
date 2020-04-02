@@ -11,8 +11,13 @@ html {
 }
 
 .form-container {
-  margin: 2%;
+  margin: 5%;
   width: 33%;
+}
+
+.app-container {
+  margin: 5%;
+  width: 66%;
 }
 
 .form-field {

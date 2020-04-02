@@ -3,6 +3,7 @@ import api from '../../api'
 import Swal from 'sweetalert2'
 import {
   Card,
+  CardHeader,
   CardTitle,
   CardBody,
   Col,
@@ -56,7 +57,9 @@ function CreateEncounterForm(): FunctionComponentElement<{}> {
 
   return (
     <Card className="form-container text-center">
-      <CardTitle tag="h2">Create an Encounter!</CardTitle>
+      <CardHeader>
+        <CardTitle tag="h2">Create an Encounter!</CardTitle>
+      </CardHeader>
 
       <CardBody>
         <Form>
