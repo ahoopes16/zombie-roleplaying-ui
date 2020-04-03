@@ -20,6 +20,10 @@ html {
   width: 66%;
 }
 
+.error-container {
+  margin: 5%;
+}
+
 .form-field {
   margin-bottom: 10%;
 }

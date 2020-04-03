@@ -32,7 +32,11 @@ function ListEncounters(): FunctionComponentElement<{}> {
   }, [])
 
   if (error) {
-    return <Alert color="danger">{error}</Alert>
+    return (
+      <Alert className="error-container" color="danger">
+        {error.message}
+      </Alert>
+    )
   }
 
   if (!encounters) {
