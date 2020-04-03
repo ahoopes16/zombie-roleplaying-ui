@@ -30,6 +30,17 @@ class API {
     )
   }
 
+  public updateEncounter(
+    id: string,
+    body: object
+  ): Promise<APIResponse<Encounter>> {
+    return this.__request<APIResponse<Encounter>>(
+      'PUT',
+      `${this.baseURL}/v1/encounters/${id}`,
+      body
+    )
+  }
+
   private async __request<T>(
     method: Method = 'GET',
     endpoint = '',
