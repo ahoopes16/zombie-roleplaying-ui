@@ -1,7 +1,13 @@
-import React, { FunctionComponentElement, useState, useEffect } from 'react'
+import React, {
+  FunctionComponentElement,
+  useState,
+  useEffect,
+  FormEvent
+} from 'react'
 import { RouterProps } from '../../types/reactRouterProps'
 import { Encounter } from '../../types/encounter.type'
 import moment from 'moment'
+import Swal from 'sweetalert2'
 import api from '../../api'
 import {
   Alert,
@@ -53,6 +59,26 @@ function EditEncounterForm(
     return <Spinner color="primary" />
   }
 
+  const onClick = async (event: FormEvent<HTMLInputElement>): Promise<void> => {
+    event.preventDefault()
+
+    try {
+      const { result } = await api.updateEncounter(id, encounter)
+
+      Swal.fire({
+        title: `Encounter "${result.title}" successfully updated!`,
+        icon: 'success'
+      })
+    } catch (error) {
+      console.error(error)
+      Swal.fire({
+        title: "Sorry, we couldn't update your encounter!",
+        text: error.message,
+        icon: 'error'
+      })
+    }
+  }
+
   const isDisabled = (): boolean => !encounter.title || !encounter.description
 
   return (
@@ -70,8 +96,8 @@ function EditEncounterForm(
                 id="edit-encounter-title-input"
                 type="text"
                 value={encounter.title}
-                onChange={(e): string =>
-                  (encounter.title = e.currentTarget.value)
+                onChange={(e): void =>
+                  setEncounter({ ...encounter, title: e.currentTarget.value })
                 }
               />
               <FormText color="muted" className="float-left">
@@ -87,8 +113,11 @@ function EditEncounterForm(
                 id="edit-encounter-description-input"
                 type="textarea"
                 value={encounter.description}
-                onChange={(e): string =>
-                  (encounter.description = e.currentTarget.value)
+                onChange={(e): void =>
+                  setEncounter({
+                    ...encounter,
+                    description: e.currentTarget.value
+                  })
                 }
               />
             </FormGroup>
@@ -133,7 +162,7 @@ function EditEncounterForm(
           </Col>
 
           <div className="text-center">
-            <Button color="primary" disabled={isDisabled()}>
+            <Button color="primary" onClick={onClick} disabled={isDisabled()}>
               Update Encounter
             </Button>
           </div>
