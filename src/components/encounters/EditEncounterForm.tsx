@@ -69,6 +69,7 @@ function EditEncounterForm(
         title: `Encounter "${result.title}" successfully updated!`,
         icon: 'success'
       })
+      setEncounter(result)
     } catch (error) {
       console.error(error)
       Swal.fire({
