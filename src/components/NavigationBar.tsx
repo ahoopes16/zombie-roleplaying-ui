@@ -29,12 +29,12 @@ function NavigationBar(): FunctionComponentElement<{}> {
               Encounters
             </DropdownToggle>
             <DropdownMenu right>
-              <DropdownItem>
-                <NavLink to="/encounters">List</NavLink>
-              </DropdownItem>
-              <DropdownItem>
-                <NavLink to="/encounters/create">Create</NavLink>
-              </DropdownItem>
+              <NavLink to="/encounters">
+                <DropdownItem>List</DropdownItem>
+              </NavLink>
+              <NavLink to="/create-encounter">
+                <DropdownItem>Create</DropdownItem>
+              </NavLink>
             </DropdownMenu>
           </UncontrolledDropdown>
         </Nav>

@@ -8,6 +8,13 @@ class API {
     this.baseURL = baseURL
   }
 
+  public getEncounter(id: string): Promise<APIResponse<Encounter>> {
+    return this.__request<APIResponse<Encounter>>(
+      'GET',
+      `${this.baseURL}/v1/encounters/${id}`
+    )
+  }
+
   public getEncounters(): Promise<APIResponse<Encounter[]>> {
     return this.__request<APIResponse<Encounter[]>>(
       'GET',
