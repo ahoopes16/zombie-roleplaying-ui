@@ -1,6 +1,7 @@
 import React, { FunctionComponentElement, useState, useEffect } from 'react'
 import { RouterProps } from '../../types/reactRouterProps'
 import { Encounter } from '../../types/encounter.type'
+import moment from 'moment'
 import api from '../../api'
 import {
   Alert,
@@ -12,10 +13,13 @@ import {
   Form,
   Col,
   FormGroup,
+  Label,
   Input,
   FormText,
   Button
 } from 'reactstrap'
+
+const format = 'YYYY-MM-DD'
 
 function EditEncounterForm(
   props: RouterProps
@@ -52,8 +56,8 @@ function EditEncounterForm(
   const isDisabled = (): boolean => !encounter.title || !encounter.description
 
   return (
-    <Card className="form-container text-center">
-      <CardHeader>
+    <Card className="form-container">
+      <CardHeader className="text-center">
         <CardTitle tag="h2">Edit Encounter</CardTitle>
       </CardHeader>
 
@@ -61,10 +65,10 @@ function EditEncounterForm(
         <Form>
           <Col>
             <FormGroup className="form-field">
+              <Label for="edit-encounter-title-input">Title</Label>
               <Input
-                id="create-encounter-title-input"
+                id="edit-encounter-title-input"
                 type="text"
-                placeholder="Title"
                 value={encounter.title}
                 onChange={(e): string =>
                   (encounter.title = e.currentTarget.value)
@@ -78,10 +82,10 @@ function EditEncounterForm(
 
           <Col>
             <FormGroup className="form-field">
+              <Label for="edit-encounter-description-input">Description</Label>
               <Input
-                id="create-encounter-description-input"
+                id="edit-encounter-description-input"
                 type="textarea"
-                placeholder="Description"
                 value={encounter.description}
                 onChange={(e): string =>
                   (encounter.description = e.currentTarget.value)
@@ -90,9 +94,49 @@ function EditEncounterForm(
             </FormGroup>
           </Col>
 
-          <Button color="primary" disabled={isDisabled()}>
-            Update Encounter
-          </Button>
+          <Col>
+            <FormGroup className="form-field">
+              <Label for="edit-encounter-times-used">Times Used</Label>
+              <Input
+                id="edit-encounter-times-used"
+                type="number"
+                value={encounter.numberOfRuns}
+                disabled
+              />
+            </FormGroup>
+          </Col>
+
+          <Col>
+            <FormGroup className="form-field">
+              <Label for="edit-encounter-created-at-date">Created At</Label>
+              <Input
+                id="edit-encounter-created-at-date"
+                type="date"
+                value={moment(encounter.createdAt).format(format)}
+                disabled
+              />
+            </FormGroup>
+          </Col>
+
+          <Col>
+            <FormGroup className="form-field">
+              <Label for="edit-encounter-updated-at-date">
+                Last Updated At
+              </Label>
+              <Input
+                id="edit-encounter-updated-at-date"
+                type="date"
+                value={moment(encounter.updatedAt).format(format)}
+                disabled
+              />
+            </FormGroup>
+          </Col>
+
+          <div className="text-center">
+            <Button color="primary" disabled={isDisabled()}>
+              Update Encounter
+            </Button>
+          </div>
         </Form>
       </CardBody>
     </Card>
