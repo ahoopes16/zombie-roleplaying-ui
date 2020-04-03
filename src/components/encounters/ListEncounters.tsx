@@ -1,5 +1,6 @@
 import React, { FunctionComponentElement, useState, useEffect } from 'react'
 import { Encounter } from '../../types/encounter.type'
+import { Link } from 'react-router-dom'
 import api from '../../api'
 import {
   Alert,
@@ -55,7 +56,11 @@ function ListEncounters(): FunctionComponentElement<{}> {
         <ListGroup>
           {encounters.map((encounter, i) => (
             <ListGroupItem key={`encounter-${i}`}>
-              <ListGroupItemHeading>{encounter.title}</ListGroupItemHeading>
+              <ListGroupItemHeading>
+                <Link to={`/encounters/${encounter._id}`}>
+                  {encounter.title}
+                </Link>
+              </ListGroupItemHeading>
               <ListGroupItemText>{encounter.description}</ListGroupItemText>
             </ListGroupItem>
           ))}
