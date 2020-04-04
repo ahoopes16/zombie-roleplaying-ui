@@ -1,3 +1,9 @@
+import { RouterProps } from '../../types/reactRouterProps'
+import { Encounter } from '../../types/encounter.type'
+import moment from 'moment'
+import Swal from 'sweetalert2'
+import api from '../../api'
+import { Redirect } from 'react-router-dom'
 import React, {
   FunctionComponentElement,
   ReactElement,
@@ -5,11 +11,6 @@ import React, {
   useEffect,
   FormEvent
 } from 'react'
-import { RouterProps } from '../../types/reactRouterProps'
-import { Encounter } from '../../types/encounter.type'
-import moment from 'moment'
-import Swal from 'sweetalert2'
-import api from '../../api'
 import {
   Alert,
   Spinner,
@@ -35,6 +36,7 @@ function EditEncounterForm(
   const { id } = props.match.params
   const [encounter, setEncounter] = useState<Encounter>()
   const [error, setError] = useState<Error>()
+  const [redirect, setRedirect] = useState(false)
 
   useEffect(() => {
     async function fetchEncounter(): Promise<void> {
@@ -49,8 +51,10 @@ function EditEncounterForm(
     fetchEncounter()
   }, [id])
 
-  const onClick = async (event: FormEvent<HTMLInputElement>): Promise<void> => {
-    event.preventDefault()
+  const updateEncounter = async (
+    e: FormEvent<HTMLInputElement>
+  ): Promise<void> => {
+    e.preventDefault()
 
     if (!encounter) {
       return
@@ -73,6 +77,47 @@ function EditEncounterForm(
         icon: 'error'
       })
     }
+  }
+
+  const deleteEncounter = async (
+    e: FormEvent<HTMLInputElement>
+  ): Promise<void | ReactElement> => {
+    e.preventDefault()
+
+    if (!encounter) {
+      return
+    }
+
+    Swal.fire({
+      title: `Are you sure you want to delete "${encounter.title}"?`,
+      text: "There's no going back!",
+      showCancelButton: true,
+      confirmButtonText: 'Delete it!',
+      showLoaderOnConfirm: true,
+      preConfirm: async () => {
+        try {
+          const { result } = await api.deleteEncounter(id)
+
+          Swal.fire({
+            title: `Successfully deleted "${result.title}"!`,
+            text: "You'll never see that stupid encounter again...",
+            icon: 'success'
+          })
+
+          setRedirect(true)
+        } catch (error) {
+          Swal.fire({
+            title: "Sorry, we couldn't delete your encounter!",
+            text: error.message,
+            icon: 'error'
+          })
+        }
+      }
+    })
+  }
+
+  if (redirect) {
+    return <Redirect to="/encounters" />
   }
 
   const isDisabled = (): boolean => !encounter?.title || !encounter?.description
@@ -170,11 +215,22 @@ function EditEncounterForm(
           </Col>
         </Row>
 
-        <div className="text-center">
-          <Button color="primary" onClick={onClick} disabled={isDisabled()}>
-            Update Encounter
-          </Button>
-        </div>
+        <Row className="text-center">
+          <Col>
+            <Button
+              color="primary"
+              onClick={updateEncounter}
+              disabled={isDisabled()}
+            >
+              Update Encounter
+            </Button>
+          </Col>
+          <Col>
+            <Button color="danger" onClick={deleteEncounter}>
+              Delete Encounter
+            </Button>
+          </Col>
+        </Row>
       </Form>
     )
   }
