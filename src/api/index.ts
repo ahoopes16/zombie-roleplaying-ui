@@ -41,6 +41,13 @@ class API {
     )
   }
 
+  public deleteEncounter(id: string): Promise<APIResponse<Encounter>> {
+    return this.__request<APIResponse<Encounter>>(
+      'DELETE',
+      `${this.baseURL}/v1/encounters/${id}`
+    )
+  }
+
   private async __request<T>(
     method: Method = 'GET',
     endpoint = '',
