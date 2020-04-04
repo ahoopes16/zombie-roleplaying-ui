@@ -17,6 +17,7 @@ import {
   CardTitle,
   CardBody,
   Form,
+  Row,
   Col,
   FormGroup,
   Label,
@@ -136,31 +137,33 @@ function EditEncounterForm(
             </FormGroup>
           </Col>
 
-          <Col>
-            <FormGroup className="form-field">
-              <Label for="edit-encounter-created-at-date">Created At</Label>
-              <Input
-                id="edit-encounter-created-at-date"
-                type="date"
-                value={moment(encounter.createdAt).format(format)}
-                disabled
-              />
-            </FormGroup>
-          </Col>
+          <Row>
+            <Col>
+              <FormGroup className="form-field">
+                <Label for="edit-encounter-created-at-date">Created At</Label>
+                <Input
+                  id="edit-encounter-created-at-date"
+                  type="date"
+                  value={moment(encounter.createdAt).format(format)}
+                  disabled
+                />
+              </FormGroup>
+            </Col>
 
-          <Col>
-            <FormGroup className="form-field">
-              <Label for="edit-encounter-updated-at-date">
-                Last Updated At
-              </Label>
-              <Input
-                id="edit-encounter-updated-at-date"
-                type="date"
-                value={moment(encounter.updatedAt).format(format)}
-                disabled
-              />
-            </FormGroup>
-          </Col>
+            <Col>
+              <FormGroup className="form-field">
+                <Label for="edit-encounter-updated-at-date">
+                  Last Updated At
+                </Label>
+                <Input
+                  id="edit-encounter-updated-at-date"
+                  type="date"
+                  value={moment(encounter.updatedAt).format(format)}
+                  disabled
+                />
+              </FormGroup>
+            </Col>
+          </Row>
 
           <div className="text-center">
             <Button color="primary" onClick={onClick} disabled={isDisabled()}>
