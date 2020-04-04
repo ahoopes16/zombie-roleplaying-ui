@@ -8,9 +8,9 @@ export interface Encounter {
   /** How many times this encounter has been run. Defaults to 0 */
   numberOfRuns: number
   /** The date this document was created. Created by Mongoose */
-  createdAt: Date
+  createdAt: string
   /** The last date this document was updated. Created by Mongoose */
-  updatedAt: Date
+  updatedAt: string
   /** The version number for this document. Created by Mongoose */
   __v: number
   /** This encounter's Mongo ObjectID */

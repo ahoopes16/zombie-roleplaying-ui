@@ -1,5 +1,11 @@
-import React, { FunctionComponentElement, useState, useEffect } from 'react'
+import React, {
+  FunctionComponentElement,
+  useState,
+  useEffect,
+  ReactElement
+} from 'react'
 import { Encounter } from '../../types/encounter.type'
+import { Link } from 'react-router-dom'
 import api from '../../api'
 import {
   Alert,
@@ -31,12 +37,35 @@ function ListEncounters(): FunctionComponentElement<{}> {
     fetchEncounters()
   }, [])
 
-  if (error) {
-    return <Alert color="danger">{error}</Alert>
-  }
+  const getCardBody = (): ReactElement => {
+    if (error) {
+      return (
+        <Alert className="error-container text-center" color="danger">
+          {error.message}
+        </Alert>
+      )
+    }
 
-  if (!encounters) {
-    return <Spinner color="primary" />
+    if (!encounters.length) {
+      return (
+        <div className="text-center">
+          <Spinner color="dark" />
+        </div>
+      )
+    }
+
+    return (
+      <ListGroup>
+        {encounters.map((encounter, i) => (
+          <ListGroupItem key={`encounter-${i}`}>
+            <ListGroupItemHeading>
+              <Link to={`/encounters/${encounter._id}`}>{encounter.title}</Link>
+            </ListGroupItemHeading>
+            <ListGroupItemText>{encounter.description}</ListGroupItemText>
+          </ListGroupItem>
+        ))}
+      </ListGroup>
+    )
   }
 
   return (
@@ -47,16 +76,7 @@ function ListEncounters(): FunctionComponentElement<{}> {
         </CardTitle>
       </CardHeader>
 
-      <CardBody>
-        <ListGroup>
-          {encounters.map((encounter, i) => (
-            <ListGroupItem key={`encounter-${i}`}>
-              <ListGroupItemHeading>{encounter.title}</ListGroupItemHeading>
-              <ListGroupItemText>{encounter.description}</ListGroupItemText>
-            </ListGroupItem>
-          ))}
-        </ListGroup>
-      </CardBody>
+      <CardBody>{getCardBody()}</CardBody>
     </Card>
   )
 }

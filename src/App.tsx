@@ -5,6 +5,7 @@ import NavigationBar from './components/NavigationBar'
 import Home from './components/Home'
 import ListEncounters from './components/encounters/ListEncounters'
 import CreateEncounterForm from './components/encounters/CreateEncounterForm'
+import EditEncounterForm from './components/encounters/EditEncounterForm'
 
 function App(): React.FunctionComponentElement<{}> {
   return (
@@ -17,9 +18,10 @@ function App(): React.FunctionComponentElement<{}> {
             <Route exact path="/encounters" component={ListEncounters} />
             <Route
               exact
-              path="/encounters/create"
+              path="/create-encounter"
               component={CreateEncounterForm}
             />
+            <Route exact path="/encounters/:id" component={EditEncounterForm} />
             <Redirect to="/" />
           </Switch>
         </div>

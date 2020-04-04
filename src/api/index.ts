@@ -8,6 +8,13 @@ class API {
     this.baseURL = baseURL
   }
 
+  public getEncounter(id: string): Promise<APIResponse<Encounter>> {
+    return this.__request<APIResponse<Encounter>>(
+      'GET',
+      `${this.baseURL}/v1/encounters/${id}`
+    )
+  }
+
   public getEncounters(): Promise<APIResponse<Encounter[]>> {
     return this.__request<APIResponse<Encounter[]>>(
       'GET',
@@ -19,6 +26,17 @@ class API {
     return this.__request<APIResponse<Encounter>>(
       'POST',
       `${this.baseURL}/v1/encounters`,
+      body
+    )
+  }
+
+  public updateEncounter(
+    id: string,
+    body: object
+  ): Promise<APIResponse<Encounter>> {
+    return this.__request<APIResponse<Encounter>>(
+      'PUT',
+      `${this.baseURL}/v1/encounters/${id}`,
       body
     )
   }

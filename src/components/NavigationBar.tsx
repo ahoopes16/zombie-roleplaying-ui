@@ -32,7 +32,7 @@ function NavigationBar(): FunctionComponentElement<{}> {
               <NavLink to="/encounters">
                 <DropdownItem>List</DropdownItem>
               </NavLink>
-              <NavLink to="/encounters/create">
+              <NavLink to="/create-encounter">
                 <DropdownItem>Create</DropdownItem>
               </NavLink>
             </DropdownMenu>
