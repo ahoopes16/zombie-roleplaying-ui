@@ -29,8 +29,6 @@ import {
   Button
 } from 'reactstrap'
 
-const format = 'YYYY-MM-DD'
-
 function EditEncounterForm(
   props: RouterProps
 ): FunctionComponentElement<RouterProps> {
