@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
   CardBody,
+  CardFooter,
   Form,
   Row,
   Col,
@@ -27,8 +28,6 @@ import {
   FormText,
   Button
 } from 'reactstrap'
-
-const format = 'YYYY-MM-DD'
 
 function EditEncounterForm(
   props: RouterProps
@@ -187,34 +186,6 @@ function EditEncounterForm(
           </FormGroup>
         </Col>
 
-        <Row>
-          <Col>
-            <FormGroup className="form-field">
-              <Label for="edit-encounter-created-at-date">Created At</Label>
-              <Input
-                id="edit-encounter-created-at-date"
-                type="date"
-                value={moment(encounter.createdAt).format(format)}
-                disabled
-              />
-            </FormGroup>
-          </Col>
-
-          <Col>
-            <FormGroup className="form-field">
-              <Label for="edit-encounter-updated-at-date">
-                Last Updated At
-              </Label>
-              <Input
-                id="edit-encounter-updated-at-date"
-                type="date"
-                value={moment(encounter.updatedAt).format(format)}
-                disabled
-              />
-            </FormGroup>
-          </Col>
-        </Row>
-
         <Row className="text-center">
           <Col>
             <Button
@@ -242,6 +213,13 @@ function EditEncounterForm(
       </CardHeader>
 
       <CardBody>{getCardBody()}</CardBody>
+
+      <CardFooter>
+        <Row className="text-center">
+          <Col>Created: {moment(encounter?.createdAt).fromNow()}</Col>
+          <Col>Last Edited: {moment(encounter?.updatedAt).fromNow()}</Col>
+        </Row>
+      </CardFooter>
     </Card>
   )
 }
