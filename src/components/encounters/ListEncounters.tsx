@@ -27,14 +27,19 @@ import {
 function ListEncounters(): FunctionComponentElement<{}> {
   const [encounters, setEncounters] = useState<Encounter[]>([])
   const [error, setError] = useState<Error>()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
+
     async function fetchEncounters(): Promise<void> {
       try {
         const { result } = await api.getEncounters()
         setEncounters(result)
       } catch (err) {
         setError(err)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -50,11 +55,20 @@ function ListEncounters(): FunctionComponentElement<{}> {
       )
     }
 
-    if (!encounters.length) {
+    if (loading) {
       return (
         <div className="text-center">
           <Spinner color="dark" />
         </div>
+      )
+    }
+
+    if (!encounters.length) {
+      return (
+        <Alert color="info" className="text-center">
+          It looks like no encounters have been created yet! Click the New
+          Encounter button above to get started.
+        </Alert>
       )
     }
 
