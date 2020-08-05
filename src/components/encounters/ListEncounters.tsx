@@ -27,14 +27,19 @@ import {
 function ListEncounters(): FunctionComponentElement<{}> {
   const [encounters, setEncounters] = useState<Encounter[]>([])
   const [error, setError] = useState<Error>()
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
+
     async function fetchEncounters(): Promise<void> {
       try {
         const { result } = await api.getEncounters()
         setEncounters(result)
       } catch (err) {
         setError(err)
+      } finally {
+        setLoading(false)
       }
     }
 
@@ -50,7 +55,7 @@ function ListEncounters(): FunctionComponentElement<{}> {
       )
     }
 
-    if (!encounters.length) {
+    if (loading) {
       return (
         <div className="text-center">
           <Spinner color="dark" />
