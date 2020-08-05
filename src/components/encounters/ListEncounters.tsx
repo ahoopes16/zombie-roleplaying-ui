@@ -63,6 +63,15 @@ function ListEncounters(): FunctionComponentElement<{}> {
       )
     }
 
+    if (!encounters.length) {
+      return (
+        <Alert color="info" className="text-center">
+          It looks like no encounters have been created yet! Click the New
+          Encounter button above to get started.
+        </Alert>
+      )
+    }
+
     return (
       <ListGroup>
         {encounters.map((encounter, i) => (
