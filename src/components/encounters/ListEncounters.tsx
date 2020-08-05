@@ -5,19 +5,23 @@ import React, {
   ReactElement
 } from 'react'
 import { Encounter } from '../../types/encounter.type'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import api from '../../api'
 import {
   Alert,
-  Spinner,
+  Button,
   Card,
+  CardBody,
   CardHeader,
   CardTitle,
-  CardBody,
+  Col,
+  Container,
   ListGroup,
   ListGroupItem,
   ListGroupItemHeading,
-  ListGroupItemText
+  ListGroupItemText,
+  Row,
+  Spinner
 } from 'reactstrap'
 
 function ListEncounters(): FunctionComponentElement<{}> {
@@ -71,9 +75,23 @@ function ListEncounters(): FunctionComponentElement<{}> {
   return (
     <Card className="app-container">
       <CardHeader>
-        <CardTitle tag="h2" className="text-center">
-          Encounters
-        </CardTitle>
+        <Container>
+          <Row>
+            <Col></Col>
+            <Col></Col>
+            <Col>
+              <CardTitle tag="h2" className="text-center">
+                Encounters
+              </CardTitle>
+            </Col>
+            <Col></Col>
+            <Col>
+              <NavLink to="/create-encounter">
+                <Button color="success">+ New Encounter</Button>
+              </NavLink>
+            </Col>
+          </Row>
+        </Container>
       </CardHeader>
 
       <CardBody>{getCardBody()}</CardBody>
